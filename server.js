@@ -5,9 +5,11 @@ require('dotenv').config();
 
 const app = express();
 require('./config/express')(app);
-const PORT = 8001;
+const PORT = process.env.PORT;
 
 require('./routes/concept')(app);
+require('./routes/expense')(app);
+require('./routes/category')(app);
 
 const db = require('./models/index');
 db.connection

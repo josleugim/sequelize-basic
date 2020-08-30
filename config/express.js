@@ -5,7 +5,7 @@ const cors = require("cors");
 
 module.exports = (app) => {
     const corsOptions = {
-        origin: "http://localhost:8081"
+        origin: "*"
     };
 
     app.use(cors(corsOptions));

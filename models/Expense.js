@@ -3,21 +3,23 @@ const Sequelize = require('sequelize');
 const moment = require('moment-timezone');
 
 module.exports = connection => {
-    return connection.define('Concept', {
+    return connection.define('Expense', {
         uuid: {
             type: Sequelize.UUID,
             primaryKey: true,
             defaultValue: Sequelize.UUIDV4
         },
-        name: {
-            type: Sequelize.STRING,
-            unique: true,
-            validate: {
-                len: [3, 50]
-            }
+        amount: {
+            type: Sequelize.FLOAT(10, 2),
+            allowNull: false,
+            isFloat: true,
+            min: 1
         },
-        description: Sequelize.TEXT,
-        updateAtFormat: {
+        note: {
+            type: Sequelize.TEXT,
+            allowNull: true
+        },
+        updatedAtFormat: {
             type: Sequelize.VIRTUAL,
             get() {
                 return moment(this.updatedAt).tz('America/Mexico_City').locale('es').format('LL')

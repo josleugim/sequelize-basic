@@ -1,10 +1,16 @@
 'use strict';
 const db = require('../models/index');
 const Concept = db.concepts;
+const Category = db.categories;
 
 const findAll = () => {
     return Concept
-        .findAll()
+        .findAll({
+            include: [{
+                model: Category,
+                as: 'categoryId'
+            }]
+        })
         .then(data => data)
         .catch(err => err)
 }
