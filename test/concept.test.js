@@ -1,19 +1,21 @@
 'use strict';
 
 const sinon = require('sinon');
-const { expect } = require('chai');
+const { expect, should } = require('chai');
 const { create, findAll } = require('../respositories/conceptRespository');
+const { findAllCtrl } = require('../controllers/conceptCtrl');
 const faker = require('faker');
 const db = require('../models/index');
 const Concept = db.concepts;
 
-describe('Testing Concept CRUD', () => {
+describe('Testing Concept repository', () => {
     const createData = {
         uuid: faker.random.uuid(),
         name: faker.name.findName(),
         description: faker.company.catchPhraseDescriptor(),
         updatedAt: faker.date.past(),
-        createdAt: faker.date.past()
+        createdAt: faker.date.past(),
+
     }
 
     const findAllData = [
@@ -50,5 +52,27 @@ describe('Testing Concept CRUD', () => {
         const concepts = await findAll(findAllData);
         expect(stub.calledOnce).to.be.true;
         expect(concepts).to.be.length(2);
+    })
+});
+
+describe('Testing controllers', () => {
+    let req = {};
+    let res;
+    let status;
+    let json;
+
+    beforeEach(() => {
+        status = sinon.stub();
+        json = sinon.spy();
+        res = { json, status };
+        status.returns(res);
+    });
+
+    it('Should return all concepts', () => {
+
+
+        findAllCtrl(req, res);
+        console.log(res.status())
+        expect(res.status.calledOnce).to.be.true;
     })
 })
