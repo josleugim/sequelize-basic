@@ -17,7 +17,7 @@ module.exports = connection => {
             }
         },
         description: Sequelize.TEXT,
-        updateAtFormat: {
+        updatedAtFormat: {
             type: Sequelize.VIRTUAL,
             get() {
                 return moment(this.updatedAt).tz('America/Mexico_City').locale('es').format('LL')
