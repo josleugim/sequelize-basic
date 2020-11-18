@@ -17,6 +17,10 @@ module.exports = connection => {
             }
         },
         description: Sequelize.TEXT,
+        isActive: {
+            type: Sequelize.BOOLEAN,
+            defaultValue: true
+        },
         updatedAtFormat: {
             type: Sequelize.VIRTUAL,
             get() {
@@ -24,4 +28,4 @@ module.exports = connection => {
             }
         }
     });
-}
+};

@@ -18,5 +18,5 @@ const create = (category) => {
 
 module.exports = {
     findAll,
-    create
-}
+    create,
+};

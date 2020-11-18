@@ -3,7 +3,7 @@ const { findAll, create } = require('../respositories/categoryRepository');
 
 const findAllCtrl = async (req, res) => {
     const data = await findAll()
-        .catch(err => res.status(500).json({ success: false, error: err }))
+        .catch(err => res.status(500).json({ success: false, error: err }));
 
     res.status(200).json({ success: true, data: data });
 };
@@ -22,4 +22,4 @@ const createCtrl = async (req, res) => {
 module.exports = {
     findAllCtrl,
     createCtrl
-}
+};

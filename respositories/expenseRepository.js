@@ -14,13 +14,13 @@ const findAll = () => {
                 include: {
                     model: Category,
                     as: 'categoryId',
-                    attributes: ['name']
+                    attributes: ['uuid', 'name']
                 }
             }]
         })
         .then(data => data)
         .catch(err => {
-            console.log(err)
+            console.log(err);
             return err
         })
 };
@@ -30,9 +30,42 @@ const create = (expense) => {
         .create(expense)
         .then(data => data)
         .catch(err => err)
-}
+};
+
+const destroy = (uuid) => {
+    return !!Expense
+        .destroy({
+            where: {uuid}
+        })
+        .then(data => data)
+        .catch(err => err)
+};
+
+const findByCategory = async (uuid) => {
+    return await Expense
+        .findAndCountAll({
+            include: [{
+                model: Concept,
+                as: 'conceptId',
+                attributes: ['name'],
+                include: {
+                    model: Category,
+                    as: 'categoryId',
+                    attributes: ['name'],
+                    where: {
+                        uuid: uuid
+                    },
+                    required: false
+                }
+            }]
+        })
+        .then(data => data)
+        .catch(err => console.error(err));
+};
 
 module.exports = {
     findAll,
-    create
-}
+    create,
+    destroy,
+    findByCategory
+};

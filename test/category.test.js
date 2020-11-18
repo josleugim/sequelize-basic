@@ -22,7 +22,7 @@ describe('Testing Category repository', () => {
             uuid: faker.random.uuid(),
             name: faker.name.findName()
         }
-    ]
+    ];
 
     it('Should create a category', async () => {
         const stub = sinon.stub(Category, 'create').resolves(createData);
@@ -32,7 +32,7 @@ describe('Testing Category repository', () => {
         expect(category.name).to.equal(createData.name);
 
         stub.restore();
-    })
+    });
 
     it('should list all categories', async () => {
         const stub = sinon.stub(Category, 'findAll').resolves(findAllData);
@@ -41,4 +41,4 @@ describe('Testing Category repository', () => {
         expect(categories).to.be.length(2);
         expect(categories).to.eql(findAllData);
     })
-})
+});
